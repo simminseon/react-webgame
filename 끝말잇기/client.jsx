@@ -1,6 +1,14 @@
+const { StrictMode } = require('react');
+const { createRoot } = require('react-dom/client')
 const React = require('react');
-const ReactDom = require('react-dom');
 
 const WordRelay = require('./wordRelay');
 
-ReactDom.render(<WordRelay />, document.querySelector('#root'));
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
+
+root.render (
+    // <StrictMode>
+        <WordRelay />
+    // </StrictMode>
+);
