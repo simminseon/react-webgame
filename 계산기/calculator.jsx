@@ -1,12 +1,6 @@
-const { useEffect } = require('react');
 const React = require('react');
-const { Component } = React;
+const Button = require('./button');
 
-const buttonStyle = {
-  width: '50px',
-  height: '50px',
-  margin: '5px',
-}
 
 const operatorStyle = {
   width: '50px',
@@ -26,70 +20,85 @@ const resultStyle = {
 
 function Calculator() {
   const [firstNum, setFirstNum] = React.useState('');
-  const [secondNum, setsSecondNum] = React.useState('');
+  const [secondNum, setSecondNum] = React.useState('');
   const [operate, setOperate] = React.useState('');
   const [result, setResult] = React.useState('');
-  // let results = 'sss';
-  useEffect(() => {
-    // onClickNumber();
-    // console.log('firstNum: ', firstNum);
-  }, [firstNum, result]);
 
   const onClickNumber = (e) => {
-    if (operate) {
-      setsSecondNum(prev => prev + e.target.textContent);
-      setResult(secondNum);
-      
-    } else {
+    if (!operate) {
       setFirstNum(prev => prev + e.target.textContent);
-      setResult(firstNum);
-      // result = firstNum;
-      // console.log('firstNum: ', firstNum);
-      console.log('result2: ', result)
-      // console.log(typeof(firstNum))
+      setResult(prev => prev + e.target.textContent);
+      console.log('첫번째 값: ', firstNum);
+      return;
     }
-  }
 
+    if(!secondNum) {
+      setResult('');
+    }
+
+    setSecondNum(prev => prev + e.target.textContent);
+    setResult(prev => prev + e.target.textContent);
+    console.log('두번째 값: ', secondNum);
+    
+  }
   const onClickOperator = (e) => {
-    if (!operate && firstNum === '') { 
-      alert('숫자를 먼저 입력하세요!');
+    if (firstNum === '') { 
+      alert('숫자를 먼저 입력하세요1111!');
       
     } else {
       setOperate(e.target.textContent);
     }
-    
   }
 
   const onClickReset = () => {
     setFirstNum('');
-    setsSecondNum('');
+    setSecondNum('');
     setOperate('');
     setResult('');
   }
 
   const onClickCalculator = () => {
-    switch ( operate ) {
-      case '+':
-        setResult(parseInt(firstNum) + parseInt(secondNum));
-        break;
-      case '-':
-        setResult(firstNum - secondNum);
-        break;
-      case 'x':
-        setResult(parseInt(firstNum) * parseInt(secondNum));;
-        break;
-      case '/':
-        setResult(parseInt(firstNum) / parseInt(secondNum));;
-        break;
-      default:
-        break;
-    }
+    if(secondNum) { 
+      switch ( operate ) {
+        case '+':
+          setResult(parseInt(firstNum) + parseInt(secondNum));
+          break;
+        case '-':
+          setResult(parseInt(firstNum) - parseInt(secondNum));
+          break;
+        case 'x':
+          setResult(parseInt(firstNum) * parseInt(secondNum));;
+          break;
+        case '/':
+          setResult(parseInt(firstNum) / parseInt(secondNum));;
+          break;
+        default:
+          break;
+      }
 
-    if (firstNum === '' || secondNum === '') {
-      alert('숫자를 입력하세요!')
-    } else if (operate === '') {
-      alert('연산자를 입력하세요!')
+      setOperate('');
+      setFirstNum(result);
+      setSecondNum('');
+      console.log('result: ', result);
+      console.log('두번째 계산 firstNum: ', firstNum);
+      console.log('두번째 계산 secondNum: ', secondNum);
+
+    } else {
+      alert('숫자를 먼저 입력하세요.');
     }
+    
+    // if(operate === '+') {
+    //   setResult(parseInt(firstNum) + parseInt(secondNum));
+    // } else if (operate === '-') {
+    //   setResult(parseInt(firstNum) - parseInt(secondNum));
+    // } else if (operate === 'x') {
+    //   setResult(parseInt(firstNum) * parseInt(secondNum));
+    // } else if (operate === '/') {
+    //   setResult(parseInt(firstNum) / parseInt(secondNum));
+    // } 
+
+    
+
   }
 
   return (
@@ -97,29 +106,29 @@ function Calculator() {
       <input style={operatorStyle} type="text" value={operate} readOnly />
       <input style={resultStyle} type="text" value={result} readOnly />
       <div>
-        <button style={buttonStyle} onClick={onClickNumber} type='button'>7</button>
-        <button style={buttonStyle} onClick={onClickNumber} type='button'>8</button>
-        <button style={buttonStyle} onClick={onClickNumber} type='button'>9</button>
-        <button style={buttonStyle} onClick={onClickOperator} type='button'>+</button>
+        <Button onClick={onClickNumber} value={7}></Button>
+        <Button onClick={onClickNumber} value={8}></Button>
+        <Button onClick={onClickNumber} value={9}></Button>
+        <Button onClick={onClickOperator} value={'+'}></Button>
       </div>
       <div>
-        <button style={buttonStyle} onClick={onClickNumber} type='button'>4</button>
-        <button style={buttonStyle} onClick={onClickNumber} type='button'>5</button>
-        <button style={buttonStyle} onClick={onClickNumber} type='button'>6</button>
-        <button style={buttonStyle} onClick={onClickOperator} type='button'>-</button>
+        <Button onClick={onClickNumber} value={4}></Button>
+        <Button onClick={onClickNumber} value={5}></Button>
+        <Button onClick={onClickNumber} value={6}></Button>
+        <Button onClick={onClickOperator} value={'-'}></Button>
       </div>
       <div>
-        <button style={buttonStyle} onClick={onClickNumber} type='button'>1</button>
-        <button style={buttonStyle} onClick={onClickNumber} type='button'>2</button>
-        <button style={buttonStyle} onClick={onClickNumber} type='button'>3</button>
-        <button style={buttonStyle} onClick={onClickOperator} type='button'>/</button>
+        <Button onClick={onClickNumber} value={1}></Button>
+        <Button onClick={onClickNumber} value={2}></Button>
+        <Button onClick={onClickNumber} value={3}></Button>
+        <Button onClick={onClickOperator} value={'/'}></Button>
       </div>
     
       <div>
-        <button style={buttonStyle} onClick={onClickReset} type='button'>C</button>
-        <button style={buttonStyle} onClick={onClickNumber} type='button'>0</button>
-        <button style={buttonStyle} onClick={onClickCalculator} type='button'>=</button>
-        <button style={buttonStyle} onClick={onClickOperator} type='button'>x</button>
+        <Button onClick={onClickReset} value={'C'}></Button>
+        <Button onClick={onClickNumber} value={0}></Button>
+        <Button onClick={onClickCalculator} value={'='}></Button>
+        <Button onClick={onClickOperator} value={'x'}></Button>
       </div>
     </>
   );
