@@ -25,28 +25,62 @@ function Calculator() {
   const [result, setResult] = React.useState('');
 
   const onClickNumber = (e) => {
-    if (!operate) {
+    if (!operate) { // 비었을때
       setFirstNum(prev => prev + e.target.textContent);
       setResult(prev => prev + e.target.textContent);
       console.log('첫번째 값: ', firstNum);
       return;
     }
 
-    if(!secondNum) {
+    if(!secondNum) { // 두번째 비었을때
       setResult('');
     }
 
     setSecondNum(prev => prev + e.target.textContent);
     setResult(prev => prev + e.target.textContent);
-    console.log('두번째 값: ', secondNum);
-    
+
   }
   const onClickOperator = (e) => {
+    if(e.target.textContent === '-') {
+      if(firstNum) {
+        setSecondNum(e.target.textContent + secondNum);
+        setResult(e.target.textContent + secondNum);
+        return;
+      }
+      setFirstNum(e.target.textContent + firstNum);
+      setResult(e.target.textContent + firstNum);
+    }
+
+
     if (firstNum === '') { 
       alert('숫자를 먼저 입력하세요1111!');
-      
     } else {
       setOperate(e.target.textContent);
+    }
+
+    if(secondNum) {
+      switch ( operate ) {
+        case '+':
+          setResult(parseInt(firstNum) + parseInt(secondNum));
+          setFirstNum(parseInt(firstNum) + parseInt(secondNum));
+          break;
+        case '-':
+          setResult(parseInt(firstNum) - parseInt(secondNum));
+          setFirstNum(parseInt(firstNum) - parseInt(secondNum));
+          break;
+        case 'x':
+          setResult(parseInt(firstNum) * parseInt(secondNum));
+          setFirstNum(parseInt(firstNum) * parseInt(secondNum));
+          break;
+        case '/':
+          setResult(parseInt(firstNum) / parseInt(secondNum));
+          setFirstNum(parseInt(firstNum) / parseInt(secondNum));
+          break;
+        default:
+          break;
+      }
+
+      setSecondNum('');
     }
   }
 
@@ -62,43 +96,30 @@ function Calculator() {
       switch ( operate ) {
         case '+':
           setResult(parseInt(firstNum) + parseInt(secondNum));
+          setFirstNum(parseInt(firstNum) + parseInt(secondNum));
           break;
         case '-':
           setResult(parseInt(firstNum) - parseInt(secondNum));
+          setFirstNum(parseInt(firstNum) - parseInt(secondNum));
           break;
         case 'x':
-          setResult(parseInt(firstNum) * parseInt(secondNum));;
+          setResult(parseInt(firstNum) * parseInt(secondNum));
+          setFirstNum(parseInt(firstNum) * parseInt(secondNum));
           break;
         case '/':
-          setResult(parseInt(firstNum) / parseInt(secondNum));;
+          setResult(parseInt(firstNum) / parseInt(secondNum));
+          setFirstNum(parseInt(firstNum) / parseInt(secondNum));
           break;
         default:
           break;
       }
 
       setOperate('');
-      setFirstNum(result);
       setSecondNum('');
-      console.log('result: ', result);
-      console.log('두번째 계산 firstNum: ', firstNum);
-      console.log('두번째 계산 secondNum: ', secondNum);
 
     } else {
       alert('숫자를 먼저 입력하세요.');
     }
-    
-    // if(operate === '+') {
-    //   setResult(parseInt(firstNum) + parseInt(secondNum));
-    // } else if (operate === '-') {
-    //   setResult(parseInt(firstNum) - parseInt(secondNum));
-    // } else if (operate === 'x') {
-    //   setResult(parseInt(firstNum) * parseInt(secondNum));
-    // } else if (operate === '/') {
-    //   setResult(parseInt(firstNum) / parseInt(secondNum));
-    // } 
-
-    
-
   }
 
   return (
@@ -134,5 +155,4 @@ function Calculator() {
   );
 }
 
-
-  module.exports = Calculator;
+module.exports = Calculator;

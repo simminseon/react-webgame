@@ -7,5 +7,7 @@ const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 
 root.render(
-  <Calculator />
+  <React.StrictMode>
+    <Calculator />
+  </React.StrictMode>
 );
