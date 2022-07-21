@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Button from "./Button";
-import Input from "./Input";
-import { buttonTheme } from "./themeStyle";
+import Button from "../../components/button/Button";
+import Input from "../../components/input/Input";
+import { buttonTheme } from "../../components/button/style";
 
 function Calculator() {
   const [firstNum, setFirstNum] = React.useState("");
@@ -106,31 +106,43 @@ function Calculator() {
     <>
       <HeadWrapStyle>
         <OperateBoxStyle>{operate}</OperateBoxStyle>
-        <Input value={result} readOnly={true} />
+        <Input value={result} readOnly={true} align={"right"} />
       </HeadWrapStyle>
       <div>
-        <Button onClick={onClickNumber} value={7}></Button>
-        <Button onClick={onClickNumber} value={8}></Button>
-        <Button onClick={onClickNumber} value={9}></Button>
-        <Button onClick={onClickOperator} value={"+"} theme={buttonTheme.orange}></Button>
+        <Button onClick={onClickNumber}>7</Button>
+        <Button onClick={onClickNumber}>8</Button>
+        <Button onClick={onClickNumber}>9</Button>
+        <Button onClick={onClickOperator} theme={buttonTheme.orange}>
+          +
+        </Button>
       </div>
       <div>
-        <Button onClick={onClickNumber} value={4}></Button>
-        <Button onClick={onClickNumber} value={5}></Button>
-        <Button onClick={onClickNumber} value={6}></Button>
-        <Button onClick={onClickOperator} value={"-"} theme={buttonTheme.orange}></Button>
+        <Button onClick={onClickNumber}>4</Button>
+        <Button onClick={onClickNumber}>5</Button>
+        <Button onClick={onClickNumber}>6</Button>
+        <Button onClick={onClickOperator} theme={buttonTheme.orange}>
+          -
+        </Button>
       </div>
       <div>
-        <Button onClick={onClickNumber} value={1}></Button>
-        <Button onClick={onClickNumber} value={2}></Button>
-        <Button onClick={onClickNumber} value={3}></Button>
-        <Button onClick={onClickOperator} value={"/"} theme={buttonTheme.orange}></Button>
+        <Button onClick={onClickNumber}>1</Button>
+        <Button onClick={onClickNumber}>2</Button>
+        <Button onClick={onClickNumber}>3</Button>
+        <Button onClick={onClickOperator} theme={buttonTheme.orange}>
+          /
+        </Button>
       </div>
       <div>
-        <Button onClick={onClickReset} value={"C"} theme={buttonTheme.darkGray}></Button>
-        <Button onClick={onClickNumber} value={0}></Button>
-        <Button onClick={onClickCalculator} value={"="} theme={buttonTheme.darkGray}></Button>
-        <Button onClick={onClickOperator} value={"x"} theme={buttonTheme.orange}></Button>
+        <Button onClick={onClickReset} theme={buttonTheme.darkGray}>
+          C
+        </Button>
+        <Button onClick={onClickNumber}>0</Button>
+        <Button onClick={onClickCalculator} theme={buttonTheme.darkGray}>
+          =
+        </Button>
+        <Button onClick={onClickOperator} theme={buttonTheme.orange}>
+          x
+        </Button>
       </div>
     </>
   );

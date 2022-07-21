@@ -1,5 +1,8 @@
 import React from "react";
-import { useInput } from "./hooks/useInput";
+import { useInput } from "../../hooks/useInput";
+import Button from "../../components/button/Button";
+import Input from "../../components/input/Input";
+import styled from "styled-components";
 
 function WordRelay() {
   const firstWord = "기러기";
@@ -51,23 +54,30 @@ function WordRelay() {
             );
           })}
           <div>{order}번째 참가자 차례입니다.</div>
-
-          <input type="text" onChange={onChangeValue} value={value} ref={inputRef} />
-          <button type="button" onClick={onClickButton}>
-            입력
-          </button>
+          <BoxStyle>
+            <Input onChange={onChangeValue} value={value} ref={inputRef} readOnly={false} />
+            <Button type="button" onClick={onClickButton}>
+              입력
+            </Button>
+          </BoxStyle>
         </div>
       ) : (
         <div>
           <div>몇명이 참가하나요?</div>
-          <input type="text" onChange={onChangeNumber} value={number} />
-          <button type="button" onClick={onClickStart}>
-            시작
-          </button>
+          <BoxStyle>
+            <Input onChange={onChangeNumber} value={number} readOnly={false} />
+            <Button type="button" onClick={onClickStart}>
+              시작
+            </Button>
+          </BoxStyle>
         </div>
       )}
     </>
   );
 }
+
+const BoxStyle = styled.div`
+  display: flex;
+`;
 
 export default WordRelay;

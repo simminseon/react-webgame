@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-function Button({ onClick, value, theme }) {
+function Button({ onClick, theme, children }) {
   return (
     <ButtonStyle onClick={onClick} theme={theme}>
-      {value}
+      {children}
     </ButtonStyle>
   );
 }
