@@ -1,32 +1,58 @@
 import React from "react";
+import { useInput } from "./hooks/useInput";
 
 function WordRelay() {
-  const [peopleNum, setPeopleNum] = React.useState("");
+  const firstWord = "기러기";
+  const [number, onChangeNumber] = useInput("");
   const [start, setStart] = React.useState(false);
+  const [value, onChangeValue, reset] = useInput("");
   const [order, setOrder] = React.useState(1);
-  const [word, setWord] = React.useState("");
-  const [value, setValue] = React.useState("");
-
-  const onChangeInput = (e) => {
-    setValue(e.target.value);
-    setPeopleNum(e.target.value);
-  };
+  const [word, setWord] = React.useState(firstWord);
+  const [wordArray, setWordArray] = React.useState([word]);
+  const inputRef = React.useRef(null);
 
   const onClickButton = () => {
-    console.log("test");
+    if (value[0] === word[word.length - 1]) {
+      setWord(value);
+      setOrder((prev) => prev + 1);
+      setWordArray((prev) => [...prev, value]);
+    } else if (value === "") {
+      alert("단어를 입력하세요!");
+    } else {
+      alert("실패!");
+      setWordArray([word]);
+    }
+
+    if (order === parseInt(number)) {
+      setOrder(1);
+    }
+
+    reset("");
+    inputRef.current.focus();
   };
 
   const onClickStart = () => {
-    setStart(true);
+    if (number) {
+      setStart(true);
+    }
   };
 
   return (
     <>
       {start ? (
         <div id="game">
-          <div>{order}번째 참가자</div>
-          <div>제시어: {word}</div>
-          <input type="text" id="wordInput" onChange={onChangeInput} value={value} />
+          <div>제시어: {firstWord}</div>
+
+          {wordArray.map((data, index) => {
+            return (
+              <ul>
+                <li key={data + index}>{wordArray[index + 1]}</li>
+              </ul>
+            );
+          })}
+          <div>{order}번째 참가자 차례입니다.</div>
+
+          <input type="text" onChange={onChangeValue} value={value} ref={inputRef} />
           <button type="button" onClick={onClickButton}>
             입력
           </button>
@@ -34,7 +60,7 @@ function WordRelay() {
       ) : (
         <div>
           <div>몇명이 참가하나요?</div>
-          <input type="text" onChange={onChangeInput} value={peopleNum} />
+          <input type="text" onChange={onChangeNumber} value={number} />
           <button type="button" onClick={onClickStart}>
             시작
           </button>
@@ -42,13 +68,6 @@ function WordRelay() {
       )}
     </>
   );
-
-  // return (
-  //   <>
-
-  //
-  //   </>
-  // );
 }
 
 export default WordRelay;
