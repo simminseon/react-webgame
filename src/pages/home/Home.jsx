@@ -1,7 +1,8 @@
 import React from "react";
+import Title from "../../components/title/Title";
 
 function Home() {
-  return <div>웹 게임을 만들며 배우는 React</div>;
+  return <Title>웹 게임을 만들며 배우는 React</Title>;
 }
 
 export default Home;

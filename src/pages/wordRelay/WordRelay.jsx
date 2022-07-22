@@ -3,6 +3,7 @@ import { useInput } from "../../hooks/useInput";
 import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
 import styled from "styled-components";
+import Title from "../../components/title/Title";
 
 function WordRelay() {
   const firstWord = "기러기";
@@ -21,6 +22,7 @@ function WordRelay() {
       setWordArray((prev) => [...prev, value]);
     } else if (value === "") {
       alert("단어를 입력하세요!");
+      return;
     } else {
       alert("실패!");
       setWordArray([word]);
@@ -42,20 +44,24 @@ function WordRelay() {
 
   return (
     <>
+      <Title>끝말잇기</Title>
       {start ? (
         <div id="game">
           <div>제시어: {firstWord}</div>
 
-          {wordArray.map((data, index) => {
-            return (
-              <ul>
-                <li key={data + index}>{wordArray[index + 1]}</li>
-              </ul>
-            );
-          })}
+          <ul>
+            {wordArray.map((data, index) => {
+              return <li key={`${data}+${index}`}>{wordArray[index + 1]}</li>;
+            })}
+          </ul>
           <div>{order}번째 참가자 차례입니다.</div>
           <BoxStyle>
-            <Input onChange={onChangeValue} value={value} ref={inputRef} readOnly={false} />
+            <Input
+              onChange={onChangeValue}
+              value={value}
+              ref={inputRef}
+              readOnly={false}
+            />
             <Button type="button" onClick={onClickButton}>
               입력
             </Button>

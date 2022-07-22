@@ -17,7 +17,7 @@ const getNumbers = () => {
   return randomData;
 };
 
-function NumberBaseball() {
+function NumberBaseball2() {
   const [answer, setAnswer] = React.useState(getNumbers());
   const [value, onChangeValue, reset] = useInput("");
   const [result, setResult] = React.useState(false);
@@ -25,15 +25,16 @@ function NumberBaseball() {
   const [ball, setBall] = React.useState(0);
   const [tries, setTries] = React.useState([]);
   const inputRef = React.useRef(null);
-  const [gameData, setGameData] = React.useState([]);
+  const [log, setLog] = React.useState("");
+  // const [gameData, setGameData] = React.useState([]);
 
-  React.useEffect(() => {}, [gameData, strike, ball]);
+  React.useEffect(() => {}, [strike, ball]);
 
-  const triesInfoData = {
-    triesData: value,
-    ballData: ball,
-    strikeData: strike,
-  };
+  // const triesInfoData = {
+  //   triesData: value,
+  //   ballData: ball,
+  //   strikeData: strike,
+  // };
   const checkValue = (input) => {
     if (value.length !== 4) {
       return alert("숫자 4개를 입력하세요!");
@@ -57,11 +58,11 @@ function NumberBaseball() {
 
       if (index > -1) {
         if (index === i) {
-          // setStrike((prev) => prev + 1);
-          triesInfoData.strikeData = triesInfoData.strikeData + 1;
+          setStrike((prev) => prev + 1);
+          // triesInfoData.strikeData = triesInfoData.strikeData + 1;
         } else {
-          // setBall((prev) => prev + 1);
-          triesInfoData.ballData = triesInfoData.ballData + 1;
+          setBall((prev) => prev + 1);
+          // triesInfoData.ballData = triesInfoData.ballData + 1;
         }
       }
     }
@@ -70,15 +71,16 @@ function NumberBaseball() {
       setResult("홈런!!");
     } else {
       setTries([...tries, value]);
-      setGameData([...gameData, triesInfoData]);
-      console.log("gameData: ", gameData);
+      // setGameData([...gameData, triesInfoData]);
+      // console.log("gameData: ", gameData);
     }
 
+    setLog(`${strike} 스트라이크, ${ball}볼`);
     reset("");
     inputRef.current.focus();
   };
-  console.log("triesInfoData: ", triesInfoData);
-  console.log("gameData: ", gameData);
+  // console.log("triesInfoData: ", triesInfoData);
+  // console.log("gameData: ", gameData);
   return (
     <>
       <Title>숫자야구</Title>
@@ -94,14 +96,12 @@ function NumberBaseball() {
           확인
         </Button>
       </BoxStyle>
-      {gameData.map((data, index) => (
+      {tries.map((data, index) => (
         <div key={`${index}`}>
-          {index}번째 시도!
-          <br />
-          입력값 : {data.triesData} -&gt; {data.strikeData}스트라이크,{" "}
-          {data.ballData}볼
+          {index}번째 시도! {data}
         </div>
       ))}
+      {log}
       {/* {tries} */}
       {result && <div>정답!!</div>}
     </>
@@ -112,4 +112,4 @@ const BoxStyle = styled.div`
   display: flex;
 `;
 
-export default NumberBaseball;
+export default NumberBaseball2;

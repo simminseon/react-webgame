@@ -1,8 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-function Input({ value, readOnly, onChange, align }) {
-  return <InputStyle type="text" value={value} onChange={onChange} readOnly={readOnly} align={align} />;
+function Input({ value, readOnly, onChange, align }, ref) {
+  return (
+    <InputStyle
+      type="text"
+      value={value}
+      onChange={onChange}
+      readOnly={readOnly}
+      align={align}
+      ref={ref}
+    />
+  );
 }
 
 const InputStyle = styled.input`
@@ -15,4 +24,4 @@ const InputStyle = styled.input`
   border: 1px solid #222;
 `;
 
-export default Input;
+export default React.forwardRef(Input);

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
 import { buttonTheme } from "../../components/button/style";
+import Title from "../../components/title/Title";
 
 function Calculator() {
   const [firstNum, setFirstNum] = React.useState("");
@@ -104,6 +105,7 @@ function Calculator() {
   };
   return (
     <>
+      <Title>계산기</Title>
       <HeadWrapStyle>
         <OperateBoxStyle>{operate}</OperateBoxStyle>
         <Input value={result} readOnly={true} align={"right"} />
