@@ -53,6 +53,16 @@ function NumberBaseball2() {
       return;
     }
 
+    if (value === answer.join("")) {
+      setResult("홈런!!");
+      setTries("");
+      reset("");
+    } else {
+      setTries([...tries, value]);
+      // setGameData([...gameData, triesInfoData]);
+      // console.log("gameData: ", gameData);
+    }
+
     for (let i = 0; i < answer.length; i++) {
       const index = value.indexOf(answer[i]);
 
@@ -67,17 +77,12 @@ function NumberBaseball2() {
       }
     }
 
-    if (value === answer.join("")) {
-      setResult("홈런!!");
-    } else {
-      setTries([...tries, value]);
-      // setGameData([...gameData, triesInfoData]);
-      // console.log("gameData: ", gameData);
-    }
-
     setLog(`${strike} 스트라이크, ${ball}볼`);
     reset("");
     inputRef.current.focus();
+    console.log("tries: ", tries);
+    console.log("strike: ", strike);
+    console.log("ball: ", ball);
   };
   // console.log("triesInfoData: ", triesInfoData);
   // console.log("gameData: ", gameData);

@@ -4,14 +4,14 @@ import styled from "styled-components";
 import Calculator from "../pages/calculator/Calculator";
 import Home from "../pages/home/Home";
 import WordRelay from "../pages/wordRelay/WordRelay";
-import NumberBaseball2 from "../pages/numberBaseball/NumberBaseball2";
+import NumberBaseball from "../pages/numberBaseball/NumberBaseball";
 
 function Router() {
   const element = useRoutes([
     { path: "/", element: <Home /> },
     { path: "wordRelay", element: <WordRelay /> },
     { path: "calculator", element: <Calculator /> },
-    { path: "numberBaseball", element: <NumberBaseball2 /> },
+    { path: "numberBaseball", element: <NumberBaseball /> },
   ]);
 
   return (
