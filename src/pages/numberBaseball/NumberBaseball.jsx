@@ -25,8 +25,6 @@ function NumberBaseball() {
     const inputRef = React.useRef(null);
     const [gameData, setGameData] = React.useState([]);
 
-    // React.useEffect(() => {}, [gameData, strike, ball]);
-
     const initialGameData = {
         triesData: value,
         ballData: 0,
@@ -55,10 +53,8 @@ function NumberBaseball() {
 
             if (index > -1) {
                 if (index === i) {
-                    // setStrike((prev) => prev + 1);
                     initialGameData.strikeData = initialGameData.strikeData + 1;
                 } else {
-                    // setBall((prev) => prev + 1);
                     initialGameData.ballData = initialGameData.ballData + 1;
                 }
             }
@@ -66,8 +62,6 @@ function NumberBaseball() {
 
         if (value === answer.join("")) {
             setResult("홈런!!");
-            // setResult(false);
-            // setGameData({ ...initialGameData });
         } else {
             setTries([...tries, value]);
             setGameData([...gameData, initialGameData]);
@@ -83,7 +77,7 @@ function NumberBaseball() {
     const onClickRestart = () => {
         inputRef.current.focus();
         setResult(false);
-        setGameData(...initialGameData);
+        setGameData([]);
         setAnswer(getNumbers());
     };
     return (
@@ -103,7 +97,6 @@ function NumberBaseball() {
                     입력값 : {data.triesData} -&gt; {data.strikeData}스트라이크, {data.ballData}볼
                 </div>
             ))}
-            {/* {tries} */}
             {result && (
                 <>
                     <div>정답!!</div>
