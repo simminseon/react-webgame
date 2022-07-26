@@ -110,31 +110,31 @@ function Calculator() {
         <OperateBoxStyle>{operate}</OperateBoxStyle>
         <Input value={result} readOnly={true} align={"right"} />
       </HeadWrapStyle>
-      <div>
+      <ButtonWrapper>
         <Button onClick={onClickNumber}>7</Button>
         <Button onClick={onClickNumber}>8</Button>
         <Button onClick={onClickNumber}>9</Button>
         <Button onClick={onClickOperator} theme={buttonTheme.orange}>
           +
         </Button>
-      </div>
-      <div>
+      </ButtonWrapper>
+      <ButtonWrapper>
         <Button onClick={onClickNumber}>4</Button>
         <Button onClick={onClickNumber}>5</Button>
         <Button onClick={onClickNumber}>6</Button>
         <Button onClick={onClickOperator} theme={buttonTheme.orange}>
           -
         </Button>
-      </div>
-      <div>
+      </ButtonWrapper>
+      <ButtonWrapper>
         <Button onClick={onClickNumber}>1</Button>
         <Button onClick={onClickNumber}>2</Button>
         <Button onClick={onClickNumber}>3</Button>
         <Button onClick={onClickOperator} theme={buttonTheme.orange}>
           /
         </Button>
-      </div>
-      <div>
+      </ButtonWrapper>
+      <ButtonWrapper>
         <Button onClick={onClickReset} theme={buttonTheme.darkGray}>
           C
         </Button>
@@ -145,22 +145,29 @@ function Calculator() {
         <Button onClick={onClickOperator} theme={buttonTheme.orange}>
           x
         </Button>
-      </div>
+      </ButtonWrapper>
     </>
   );
 }
 
 const HeadWrapStyle = styled.div`
   display: flex;
+  width: 215px;
+  margin-bottom: 5px;
 `;
 const OperateBoxStyle = styled.div`
   width: 50px;
   height: 50px;
-  margin: 5px;
+  margin-right: 5px;
   border: 1px solid #222;
   line-height: 50px;
   background: #fff;
   text-align: center;
   box-sizing: border-box;
+`;
+const ButtonWrapper = styled.div`
+  button {
+    margin: 0 5px 5px 0;
+  }
 `;
 export default Calculator;

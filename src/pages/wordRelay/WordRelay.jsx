@@ -7,7 +7,7 @@ import Title from "../../components/title/Title";
 
 function WordRelay() {
   const firstWord = "기러기";
-  const [number, onChangeNumber] = useInput("");
+  const [number, onChangeNumber, resetNumber] = useInput("");
   const [start, setStart] = React.useState(false);
   const [value, onChangeValue, reset] = useInput("");
   const [order, setOrder] = React.useState(1);
@@ -26,6 +26,8 @@ function WordRelay() {
     } else {
       alert("실패!");
       setWordArray([word]);
+      setStart(false);
+      resetNumber("");
     }
 
     if (order === parseInt(number)) {
@@ -56,12 +58,7 @@ function WordRelay() {
           </ul>
           <div>{order}번째 참가자 차례입니다.</div>
           <BoxStyle>
-            <Input
-              onChange={onChangeValue}
-              value={value}
-              ref={inputRef}
-              readOnly={false}
-            />
+            <Input onChange={onChangeValue} value={value} ref={inputRef} readOnly={false} />
             <Button type="button" onClick={onClickButton}>
               입력
             </Button>
@@ -84,6 +81,11 @@ function WordRelay() {
 
 const BoxStyle = styled.div`
   display: flex;
+  width: 215px;
+
+  input {
+    margin-right: 5px;
+  }
 `;
 
 export default WordRelay;

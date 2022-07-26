@@ -10,3 +10,9 @@ export const buttonTheme = {
     color: #fff;
   `,
 };
+
+export const buttonSize = {
+  full: css`
+    width: 100%;
+  `,
+};
