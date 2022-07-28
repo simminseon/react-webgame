@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useInput } from "../../hooks/useInput";
 import Button from "../../components/button/Button";
@@ -96,7 +96,6 @@ function NumberBaseball() {
       setResult(true);
     }
 
-    console.log("여기ㄴ,ㄴ??", out);
     reset("");
   };
   // console.log("initialGameData: ", initialGameData);
