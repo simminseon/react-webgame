@@ -6,6 +6,7 @@ import Home from "../pages/home/Home";
 import WordRelay from "../pages/wordRelay/WordRelay";
 import NumberBaseball from "../pages/numberBaseball/NumberBaseball";
 import ResponseCheck from "../pages/responseCheck/ResponseCheck";
+import Lotto from "../pages/lotto/Lotto";
 
 function Router() {
   const element = useRoutes([
@@ -14,6 +15,7 @@ function Router() {
     { path: "calculator", element: <Calculator /> },
     { path: "numberBaseball", element: <NumberBaseball /> },
     { path: "responseCheck", element: <ResponseCheck /> },
+    { path: "lotto", element: <Lotto /> },
   ]);
 
   return (
@@ -33,6 +35,9 @@ function Router() {
         </NavItemStyle>
         <NavItemStyle>
           <Link to="/responseCheck">반응체크</Link>
+        </NavItemStyle>
+        <NavItemStyle>
+          <Link to="/lotto">로또 추첨기</Link>
         </NavItemStyle>
       </NavListStyle>
       {element}
