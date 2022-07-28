@@ -113,14 +113,26 @@ function NumberBaseball() {
     <>
       <Title>숫자야구</Title>
       <BoxStyle>
-        <Input onChange={onChangeValue} value={value} readOnly={false} ref={inputRef} />
+        <Input
+          onChange={onChangeValue}
+          value={value}
+          readOnly={false}
+          ref={inputRef}
+        />
         <Button type="button" onClick={onClickConfirm}>
           확인
         </Button>
       </BoxStyle>
       <LogStyle>{logs}</LogStyle>
-
-      <Try gameData={gameData} result={result} onClick={onClickRestart} />
+      {gameData.map((data, index) => (
+        <Try
+          key={`${index}`}
+          data={data}
+          index={index}
+          result={result}
+          onClick={onClickRestart}
+        />
+      ))}
     </>
   );
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Title from "../../components/title/Title";
 import Button from "../../components/button/Button";
 import { buttonTheme, buttonSize } from "../../components/button/style";
 
@@ -49,13 +50,20 @@ function ResponseCheck() {
 
   return (
     <>
+      <Title>반응속도 체크</Title>
       <BoxStyle onClick={onClickCheck} color={color}>
         {logs}
       </BoxStyle>
       {result.length !== 0 && (
         <>
-          <TestStyle>평균시간 : {result.reduce((a, c) => a + c / result.length)}ms</TestStyle>
-          <Button onClick={onClickReset} theme={buttonTheme.orange} size={buttonSize.full}>
+          <TestStyle>
+            평균시간 : {result.reduce((a, c) => a + c / result.length)}ms
+          </TestStyle>
+          <Button
+            onClick={onClickReset}
+            theme={buttonTheme.orange}
+            size={buttonSize.full}
+          >
             Reset
           </Button>
         </>

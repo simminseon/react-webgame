@@ -34,7 +34,7 @@ function Router() {
           <Link to="/numberBaseball">숫자야구</Link>
         </NavItemStyle>
         <NavItemStyle>
-          <Link to="/responseCheck">반응체크</Link>
+          <Link to="/responseCheck">반응속도</Link>
         </NavItemStyle>
         <NavItemStyle>
           <Link to="/lotto">로또 추첨기</Link>
