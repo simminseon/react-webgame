@@ -4,7 +4,7 @@ import { useInput } from "../../hooks/useInput";
 import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
 import Title from "../../components/title/Title";
-import { buttonTheme, buttonSize } from "../../components/button/style";
+import Try from "./Try";
 
 const getNumbers = () => {
   const initialData = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -120,20 +120,7 @@ function NumberBaseball() {
       </BoxStyle>
       <LogStyle>{logs}</LogStyle>
 
-      {gameData.map((data, index) => (
-        <div key={`${index}`}>
-          {index + 1}번째 시도!
-          <br />
-          {data.outData ? `입력값 : ${data.triesData} -> 아웃!` : `입력값 : ${data.triesData} -> ${data.strikeData}스트라이크, ${data.ballData}볼`}
-        </div>
-      ))}
-      {result && (
-        <>
-          <Button onClick={onClickRestart} theme={buttonTheme.orange} size={buttonSize.full}>
-            다시시작!
-          </Button>
-        </>
-      )}
+      <Try gameData={gameData} result={result} onClick={onClickRestart} />
     </>
   );
 }

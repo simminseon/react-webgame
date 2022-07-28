@@ -1,9 +1,8 @@
 import React from "react";
 import { useInput } from "../../hooks/useInput";
-import Button from "../../components/button/Button";
-import Input from "../../components/input/Input";
-import styled from "styled-components";
 import Title from "../../components/title/Title";
+import WordInput from "./WordInput";
+import WordArray from "./WordArray";
 
 function WordRelay() {
   const firstWord = "기러기";
@@ -50,42 +49,29 @@ function WordRelay() {
       {start ? (
         <div id="game">
           <div>제시어: {firstWord}</div>
-
-          <ul>
-            {wordArray.map((data, index) => {
-              return <li key={`${data}+${index}`}>{wordArray[index + 1]}</li>;
-            })}
-          </ul>
+          <WordArray wordArray={wordArray} />
           <div>{order}번째 참가자 차례입니다.</div>
-          <BoxStyle>
-            <Input onChange={onChangeValue} value={value} ref={inputRef} readOnly={false} />
-            <Button type="button" onClick={onClickButton}>
-              입력
-            </Button>
-          </BoxStyle>
+          <WordInput
+            onChange={onChangeValue}
+            onClick={onClickButton}
+            value={value}
+            ref={inputRef}
+          />
         </div>
       ) : (
         <div>
           <div>몇명이 참가하나요?</div>
-          <BoxStyle>
-            <Input onChange={onChangeNumber} value={number} readOnly={false} />
-            <Button type="button" onClick={onClickStart}>
-              시작
-            </Button>
-          </BoxStyle>
+          <WordInput
+            onChange={onChangeNumber}
+            onClick={onClickStart}
+            value={number}
+            ref={inputRef}
+            readOnly={false}
+          />
         </div>
       )}
     </>
   );
 }
-
-const BoxStyle = styled.div`
-  display: flex;
-  width: 215px;
-
-  input {
-    margin-right: 5px;
-  }
-`;
 
 export default WordRelay;
