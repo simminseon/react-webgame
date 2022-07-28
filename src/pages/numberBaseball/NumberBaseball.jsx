@@ -80,7 +80,6 @@ function NumberBaseball() {
     //   setResult(true);
     //   console.log("실패실패");
     // }
-    console.log("out: ", out);
 
     if (value === answer.join("")) {
       setLogs("홈런!!");
@@ -101,7 +100,6 @@ function NumberBaseball() {
   // console.log("initialGameData: ", initialGameData);
   // console.log("gameData: ", gameData);
   // console.log("tries: ", tries);
-  console.log("바깥out:", out);
 
   const onClickRestart = () => {
     inputRef.current.focus();
@@ -114,7 +112,6 @@ function NumberBaseball() {
   return (
     <>
       <Title>숫자야구</Title>
-      {answer}
       <BoxStyle>
         <Input onChange={onChangeValue} value={value} readOnly={false} ref={inputRef} />
         <Button type="button" onClick={onClickConfirm}>
