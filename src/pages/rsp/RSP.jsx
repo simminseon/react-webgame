@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Title from "../../components/title/Title";
 
 const rspCoords = {
   바위: "0",
@@ -67,6 +68,7 @@ function RSP() {
 
   return (
     <>
+      <Title>가위바위보</Title>
       <ComputerStyle style={{ background: `url(https://en.pimg.jp/023/182/267/1/23182267.jpg) ${imgCoord} 0` }} />
       <button onClick={() => onClickMe("가위")}>가위</button>
       <button onClick={() => onClickMe("바위")}>바위</button>
