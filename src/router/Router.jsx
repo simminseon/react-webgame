@@ -9,6 +9,7 @@ import ResponseCheck from "../pages/responseCheck/ResponseCheck";
 import Lotto from "../pages/lotto/Lotto";
 import RSP from "../pages/rsp/RSP";
 import Game from "../pages/tictactoe/Tictactoe2";
+import MineSearch from "../pages/mineSearch/MineSearch";
 
 function Router() {
   const element = useRoutes([
@@ -20,6 +21,7 @@ function Router() {
     { path: "lotto", element: <Lotto /> },
     { path: "rsp", element: <RSP /> },
     { path: "tictactoe2", element: <Game /> },
+    { path: "mineSearch", element: <MineSearch /> },
   ]);
 
   return (
@@ -48,6 +50,9 @@ function Router() {
         </NavItemStyle>
         <NavItemStyle>
           <Link to="/tictactoe2">틱택토</Link>
+        </NavItemStyle>
+        <NavItemStyle>
+          <Link to="/mineSearch">지뢰찾기</Link>
         </NavItemStyle>
       </NavListStyle>
       {element}
