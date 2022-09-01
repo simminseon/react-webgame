@@ -8,7 +8,7 @@ import NumberBaseball from "../pages/numberBaseball/NumberBaseball";
 import ResponseCheck from "../pages/responseCheck/ResponseCheck";
 import Lotto from "../pages/lotto/Lotto";
 import RSP from "../pages/rsp/RSP";
-import Tictactoe from "../pages/tictactoe/Tictactoe";
+import Game from "../pages/tictactoe/Tictactoe2";
 
 function Router() {
   const element = useRoutes([
@@ -19,7 +19,7 @@ function Router() {
     { path: "responseCheck", element: <ResponseCheck /> },
     { path: "lotto", element: <Lotto /> },
     { path: "rsp", element: <RSP /> },
-    { path: "tictactoe", element: <Tictactoe /> },
+    { path: "tictactoe2", element: <Game /> },
   ]);
 
   return (
@@ -47,7 +47,7 @@ function Router() {
           <Link to="/rsp">가위바위보</Link>
         </NavItemStyle>
         <NavItemStyle>
-          <Link to="/tictactoe">틱택토</Link>
+          <Link to="/tictactoe2">틱택토</Link>
         </NavItemStyle>
       </NavListStyle>
       {element}

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Title from "../../components/title/Title";
 import Square from "./Square";
+import Game from "./Tictactoe2";
 
 const initialData = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
@@ -31,20 +32,17 @@ function Tictactoe() {
   // }, [boardData])
 
   const [boardData, setBoardData] = React.useState(initialData);
-  const [turn, setTurn] = React.useState(1);
+  // const [turn, setTurn] = React.useState(1);
   const [result, setResult] = React.useState("");
   const [count, setCount] = React.useState(0);
-  const [history, setHistory] = React.useState([]);
+  const [history, setHistory] = React.useState([initialData]);
   const winner = calculateWinner(boardData);
 
+  const turn = (count % 2) + 1;
+
+  console.log(boardData)
   const onClickSqure = React.useCallback(
     (selectedId) => {
-      if (turn === 1) {
-        setTurn(2);
-      } else if (turn === 2) {
-        setTurn(1);
-      }
-
       const selectedItem = boardData.map((data, index) => {
         if (parseInt(selectedId) === index) {
           return turn;
@@ -54,25 +52,27 @@ function Tictactoe() {
       });
 
       setBoardData(selectedItem);
-      setHistory((prev) => [...prev, boardData]);
+      setHistory([...history, selectedItem]);
       setCount((prev) => prev + 1);
-      console.log(boardData);
-      console.log(history);
+console.log(winner)
       if (winner) {
         const whoIsWinner = winner === 1 ? "O" : "x";
         setResult(`${whoIsWinner}가 이겼습니다.`);
       }
     },
-    [boardData, winner, turn]
+    [boardData, winner, turn, result]
   );
 
   const onClickHistory = (data) => {
-    setBoardData(data);
+
+    const dd = history.splice(0, data + 1);
+    setHistory(dd)
+    setBoardData(dd[data])
   };
+
   return (
     <>
       <Title>틱택토</Title>
-      {turn === 1 ? "O" : "X"} 차례
       <BoardStyle>
         {boardData.map((data, index) => {
           return (
@@ -85,15 +85,16 @@ function Tictactoe() {
           );
         })}
       </BoardStyle>
+      <TurnStyle>{turn === 1 ? "O" : "X"} 차례</TurnStyle>
       {history.map((data, index) => {
         return (
-          <button type="button" onClick={() => onClickHistory(data)}>
-            {index}번째로 돌아가기
-          </button>
+          <ButtonStyle type="button" key={index} onClick={() => onClickHistory(index)}>
+            {index ? `${index}번째로 돌아가기` : `게임 시작`}
+          </ButtonStyle>
         );
       })}
-      <div>{count}</div>
       <div>{result}</div>
+      <Game />
     </>
   );
 }
@@ -102,6 +103,16 @@ const BoardStyle = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100px;
+`;
+
+const TurnStyle = styled.div`
+  padding: 5px 0;
+  font-weight: bold;
+`;
+
+const ButtonStyle = styled.button`
+  display: block;
+  margin: 5px 0;
 `;
 
 export default Tictactoe;
