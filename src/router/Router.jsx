@@ -10,6 +10,7 @@ import Lotto from "../pages/lotto/Lotto";
 import RSP from "../pages/rsp/RSP";
 import Game from "../pages/tictactoe/Tictactoe2";
 import MineSearch from "../pages/mineSearch/MineSearch";
+import RPG from "../pages/rpg/RPG";
 
 function Router() {
   const element = useRoutes([
@@ -21,6 +22,7 @@ function Router() {
     { path: "lotto", element: <Lotto /> },
     { path: "rsp", element: <RSP /> },
     { path: "tictactoe2", element: <Game /> },
+    { path: "rpg", element: <RPG /> },
     { path: "mineSearch", element: <MineSearch /> },
   ]);
 
@@ -52,8 +54,11 @@ function Router() {
           <Link to="/tictactoe2">틱택토</Link>
         </NavItemStyle>
         <NavItemStyle>
-          <Link to="/mineSearch">지뢰찾기</Link>
+          <Link to="/rpg">RPG</Link>
         </NavItemStyle>
+        {/* <NavItemStyle>
+          <Link to="/mineSearch">지뢰찾기</Link>
+        </NavItemStyle> */}
       </NavListStyle>
       {element}
     </>

@@ -21,6 +21,7 @@ function Form() {
     dispatch({ type: "START_GAME", row, cell, mine });
   }, [row, cell, mine]);
 
+  // console.log(row, cell, mine);
   return (
     <div>
       <input
