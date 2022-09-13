@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { useInput } from "../../hooks/useInput";
 import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
+import Title from "../../components/title/Title";
 
 const monsterList = [
   { name: "슬라임", hp: 25, att: 10, xp: 10 },
@@ -148,6 +149,7 @@ function RPG() {
 
   return (
     <>
+      <Title>RPG게임</Title>
       {start && (
         <>
           <span>주인공을 입력하세요!</span>

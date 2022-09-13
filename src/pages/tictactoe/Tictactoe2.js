@@ -1,4 +1,5 @@
 import React from "react";
+import Title from "../../components/title/Title";
 
 function Square({ value, onClick, winnerCell }) {
   return (
@@ -131,25 +132,28 @@ function Game() {
   };
 
   return (
-    <div className="game">
-      <div className="game-board">
-        <Board
-          winner={winner}
-          boardData={current.gameData}
-          handleClick={handleClick}
-        />
-      </div>
-      <div className="game-info">
-        <div>{status}</div>
+    <>
+      <Title>틱택토</Title>
+      <div className="game">
+        <div className="game-board">
+          <Board
+            winner={winner}
+            boardData={current.gameData}
+            handleClick={handleClick}
+          />
+        </div>
+        <div className="game-info">
+          <div>{status}</div>
 
-        <ol>{moves}</ol>
+          <ol>{moves}</ol>
+        </div>
+        <div>
+          <button type="button" onClick={handleClickSort}>
+            {isAscending ? "내림차순" : "오름차순"}
+          </button>
+        </div>
       </div>
-      <div>
-        <button type="button" onClick={handleClickSort}>
-          {isAscending ? "내림차순" : "오름차순"}
-        </button>
-      </div>
-    </div>
+    </>
   );
 }
 
