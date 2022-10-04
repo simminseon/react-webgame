@@ -1,52 +1,8 @@
 import React from "react";
+import styled from "styled-components";
 import Title from "../../components/title/Title";
-
-function Square({ value, onClick, winnerCell }) {
-  return (
-    <button
-      className="square"
-      onClick={onClick}
-      style={{ backgroundColor: winnerCell ? "pink" : "white" }}
-    >
-      {value}
-    </button>
-  );
-}
-
-function Board({ winner, boardData, handleClick }) {
-  const renderSquare = (i) => {
-    let winnerCell = false;
-    if (winner && winner.indexOf(i) > -1) {
-      winnerCell = true;
-    }
-
-    return (
-      <Square
-        key={i}
-        value={boardData[i]}
-        onClick={() => handleClick(i)}
-        winnerCell={winnerCell}
-      />
-    );
-  };
-  const renderBoard = () => {
-    const board = [];
-    for (let row = 0; row < 3; row++) {
-      const boardRow = [];
-      for (let col = 0; col < 3; col++) {
-        boardRow.push(renderSquare(row * 3 + col));
-      }
-      board.push(
-        <div key={row} className="board-row">
-          {boardRow}
-        </div>
-      );
-    }
-
-    return board;
-  };
-  return <div>{renderBoard()}</div>;
-}
+import GameBoard from "./GameBoard";
+import GameHistory from "./GameHistory";
 
 function Game() {
   const initialData = Array(9).fill(null);
@@ -91,33 +47,6 @@ function Game() {
     setStep(historyIndex);
   };
 
-  const moves = history.map((stepData, move) => {
-    const desc = move
-      ? "Go to move #" +
-        move +
-        "(" +
-        stepData.position.row +
-        "," +
-        stepData.position.col +
-        ")"
-      : "Go to game start";
-
-    return (
-      <li key={move}>
-        <button
-          onClick={() => JumpTo(move)}
-          style={{ fontWeight: move === step ? "bold" : "normal" }}
-        >
-          {desc}
-        </button>
-      </li>
-    );
-  });
-
-  if (!isAscending) {
-    moves.sort((a, b) => b.key - a.key);
-  }
-
   let status;
   if (winner) {
     status = `winner : ${winner[0]}`;
@@ -134,25 +63,30 @@ function Game() {
   return (
     <>
       <Title>틱택토</Title>
-      <div className="game">
-        <div className="game-board">
-          <Board
+      <GameStyle>
+        <div>
+          <GameBoard
             winner={winner}
             boardData={current.gameData}
             handleClick={handleClick}
           />
         </div>
-        <div className="game-info">
+        <div>
           <div>{status}</div>
 
-          <ol>{moves}</ol>
+          <GameHistory
+            history={history}
+            onClick={JumpTo}
+            step={step}
+            isAscending={isAscending}
+          />
         </div>
         <div>
           <button type="button" onClick={handleClickSort}>
             {isAscending ? "내림차순" : "오름차순"}
           </button>
         </div>
-      </div>
+      </GameStyle>
     </>
   );
 }
@@ -177,5 +111,14 @@ function calculateWinner(squares) {
   }
   return null;
 }
+
+const GameStyle = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  > div + div {
+    margin-left: 20px;
+  }
+`;
 
 export default Game;

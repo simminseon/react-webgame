@@ -2,21 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import { useState, useRef } from "react";
 import { useInput } from "../../hooks/useInput";
-import Button from "../../components/button/Button";
-import Input from "../../components/input/Input";
 import Title from "../../components/title/Title";
+import ScreenStart from "./ScreenStart";
+import ScreenGame from "./ScreenGame";
+import Stat from "./Stat";
 
 const monsterList = [
   { name: "슬라임", hp: 25, att: 10, xp: 10 },
   { name: "스켈레톤", hp: 50, att: 15, xp: 20 },
   { name: "마왕", hp: 150, att: 35, xp: 50 },
 ];
-
-const colorSet = {
-  hp: "green",
-  xp: "blue",
-  att: "orange",
-};
 
 function RPG() {
   const [screen, setScreen] = useState("start");
@@ -27,6 +22,7 @@ function RPG() {
 
   const inputRef = useRef(null);
   const inputRef2 = useRef(null);
+  const inputRef3 = useRef(null);
   class Character {
     constructor(name, hp, xp, att) {
       this.name = name;
@@ -80,7 +76,7 @@ function RPG() {
   const onClickGame = () => {
     // 모험
     reset("");
-
+    inputRef2.current.focus();
     if (value === "1") {
       const randomIndex = Math.floor(Math.random() * monsterList.length);
       const randomMonster = monsterList[randomIndex];
@@ -108,7 +104,7 @@ function RPG() {
 
   const onClickBattle = () => {
     reset("");
-    inputRef2.current.focus();
+    inputRef3.current.focus();
 
     if (value === "1") {
       hero.attack(monster);
@@ -153,95 +149,42 @@ function RPG() {
   return (
     <>
       <Title>RPG게임</Title>
-      {screen === "start" && (
-        <>
-          <span>주인공을 입력하세요!</span>
-          <BoxStyle>
-            <Input onChange={onChangeValue} value={value} ref={inputRef} />
-            <Button type="button" onClick={onClickStart}>
-              시작
-            </Button>
-          </BoxStyle>
-        </>
-      )}
       <div id="screen">
-        {(screen === "game" || screen === "battle") && (
-          <div id="hero-stat">
-            <StatStyle bold>{hero.name}</StatStyle>
-            <StatStyle>(Lev {hero.lev}) </StatStyle>
-
-            <StatStyle color={colorSet.hp}>
-              hp : {hero.hp}/{hero.maxHp}
-            </StatStyle>
-            <StatStyle color={colorSet.xp}>
-              xp : {hero.xp}/{15 * hero.lev}
-            </StatStyle>
-            <StatStyle color={colorSet.att}>att : {hero.att}</StatStyle>
-          </div>
+        {screen === "start" ? (
+          <ScreenStart
+            onChange={onChangeValue}
+            value={value}
+            inputRef={inputRef}
+            onClick={onClickStart}
+          />
+        ) : (
+          <Stat target={hero} hero={true} />
         )}
+
         {screen === "game" && (
-          <GameBoxStyle>
-            <div id="menu-1">1.모험</div>
-            <div id="menu-2">2.휴식</div>
-            <div id="menu-3">3.종료</div>
-            <BoxStyle>
-              <Input onChange={onChangeValue} value={value} />
-              <Button type="button" onClick={onClickGame}>
-                입력
-              </Button>
-            </BoxStyle>
-          </GameBoxStyle>
+          <ScreenGame
+            onChange={onChangeValue}
+            value={value}
+            inputRef={inputRef2}
+            onClick={onClickGame}
+            screen={"game"}
+          />
         )}
         {screen === "battle" && (
-          <GameBoxStyle>
-            <div id="battle-1">1.공격</div>
-            <div id="battle-2">2.회복</div>
-            <div id="battle-3">3.도망</div>
-            <BoxStyle>
-              <Input onChange={onChangeValue} value={value} ref={inputRef2} />
-              <Button type="button" onClick={onClickBattle}>
-                입력
-              </Button>
-            </BoxStyle>
-          </GameBoxStyle>
+          <ScreenGame
+            onChange={onChangeValue}
+            value={value}
+            inputRef={inputRef3}
+            onClick={onClickBattle}
+            screen={"battle"}
+          />
         )}
         <MessageStyle>{message}</MessageStyle>
-        {monster && (
-          <div id="monster-stat">
-            <StatStyle bold>{monster.name} </StatStyle>
-            <StatStyle color={colorSet.hp}>
-              hp : {monster.hp}/{monster.maxHp}
-            </StatStyle>
-            <StatStyle color={colorSet.xp}>xp : {monster.xp}</StatStyle>
-            <StatStyle color={colorSet.att}>att : {monster.att}</StatStyle>
-          </div>
-        )}
+        {monster && <Stat target={monster} />}
       </div>
     </>
   );
 }
-
-const BoxStyle = styled.div`
-  display: flex;
-  width: 215px;
-
-  input {
-    margin-right: 5px;
-  }
-`;
-
-const GameBoxStyle = styled.div`
-  padding: 10px 0;
-`;
-
-const StatStyle = styled.span`
-  display: inline-block;
-  vertical-align: top;
-  font-size: 14px;
-  padding-right: 10px;
-  font-weight: ${(props) => (props.bold ? "bold" : "normal")};
-  color: ${(props) => props.color || "black"};
-`;
 
 const MessageStyle = styled.div`
   padding-bottom: 10px;

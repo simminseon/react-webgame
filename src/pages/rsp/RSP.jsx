@@ -61,15 +61,16 @@ function RSP() {
       setResult("졌습니다!");
       setScore((prev) => prev - 1);
     }
-
-    console.log("myScore: ", myScore);
-    console.log("cpuScore: ", cpuScore);
   };
 
   return (
     <>
       <Title>가위바위보</Title>
-      <ComputerStyle style={{ background: `url(https://en.pimg.jp/023/182/267/1/23182267.jpg) ${imgCoord} 0` }} />
+      <ComputerStyle
+        style={{
+          background: `url(https://en.pimg.jp/023/182/267/1/23182267.jpg) ${imgCoord} 0`,
+        }}
+      />
       <button onClick={() => onClickMe("가위")}>가위</button>
       <button onClick={() => onClickMe("바위")}>바위</button>
       <button onClick={() => onClickMe("보")}>보</button>

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useInput } from "../../hooks/useInput";
+import InputBox from "../../components/inputBox/InputBox";
 import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
 import Title from "../../components/title/Title";
@@ -75,11 +76,6 @@ function NumberBaseball() {
       initialGameData.outData = true;
       setOut((prev) => prev + 1);
     }
-    // if (out === 3) {
-    //   setLogs(`아웃!! 정답은 ${answer.join("")} 였습니다.`);
-    //   setResult(true);
-    //   console.log("실패실패");
-    // }
 
     if (value === answer.join("")) {
       setLogs("홈런!!");
@@ -97,9 +93,6 @@ function NumberBaseball() {
 
     reset("");
   };
-  // console.log("initialGameData: ", initialGameData);
-  // console.log("gameData: ", gameData);
-  // console.log("tries: ", tries);
 
   const onClickRestart = () => {
     inputRef.current.focus();
@@ -112,7 +105,7 @@ function NumberBaseball() {
   return (
     <>
       <Title>숫자야구</Title>
-      <BoxStyle>
+      <InputBox>
         <Input
           onChange={onChangeValue}
           value={value}
@@ -122,7 +115,7 @@ function NumberBaseball() {
         <Button type="button" onClick={onClickConfirm}>
           확인
         </Button>
-      </BoxStyle>
+      </InputBox>
       <LogStyle>{logs}</LogStyle>
       {gameData.map((data, index) => (
         <Try
@@ -136,15 +129,6 @@ function NumberBaseball() {
     </>
   );
 }
-
-const BoxStyle = styled.div`
-  display: flex;
-  width: 215px;
-
-  input {
-    margin-right: 5px;
-  }
-`;
 
 const LogStyle = styled.strong`
   display: block;

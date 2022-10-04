@@ -8,7 +8,7 @@ import NumberBaseball from "../pages/numberBaseball/NumberBaseball";
 import ResponseCheck from "../pages/responseCheck/ResponseCheck";
 import Lotto from "../pages/lotto/Lotto";
 import RSP from "../pages/rsp/RSP";
-import Game from "../pages/tictactoe/Tictactoe2";
+import Game from "../pages/tictactoe/Tictactoe";
 import MineSearch from "../pages/mineSearch/MineSearch";
 import RPG from "../pages/rpg/RPG";
 
@@ -21,7 +21,7 @@ function Router() {
     { path: "responseCheck", element: <ResponseCheck /> },
     { path: "lotto", element: <Lotto /> },
     { path: "rsp", element: <RSP /> },
-    { path: "tictactoe2", element: <Game /> },
+    { path: "tictactoe", element: <Game /> },
     { path: "rpg", element: <RPG /> },
     { path: "mineSearch", element: <MineSearch /> },
   ]);
@@ -51,7 +51,7 @@ function Router() {
           <Link to="/rsp">가위바위보</Link>
         </NavItemStyle>
         <NavItemStyle>
-          <Link to="/tictactoe2">틱택토</Link>
+          <Link to="/tictactoe">틱택토</Link>
         </NavItemStyle>
         <NavItemStyle>
           <Link to="/rpg">RPG</Link>
