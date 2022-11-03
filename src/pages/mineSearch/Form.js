@@ -1,6 +1,7 @@
 import React from "react";
+import { useCallback } from "react";
 import { useContext } from "react";
-import { TableContext } from "./MineSearch";
+import { START_GAME, TableContext } from "./MineSearch";
 
 function Form() {
   const [row, setRow] = React.useState(10);
@@ -17,8 +18,8 @@ function Form() {
   const onChangeMine = React.useCallback((e) => {
     setMine(e.target.value);
   }, []);
-  const onClickButton = React.useCallback(() => {
-    dispatch({ type: "START_GAME", row, cell, mine });
+  const onClickBtn = useCallback(() => {
+    dispatch({ type: START_GAME, row, cell, mine });
   }, [row, cell, mine]);
 
   // console.log(row, cell, mine);
@@ -42,7 +43,7 @@ function Form() {
         vlaue={mine}
         onChange={onChangeMine}
       />
-      <button onClick={onClickButton}>시작</button>
+      <button onClick={onClickBtn}>시작</button>
     </div>
   );
 }

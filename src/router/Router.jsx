@@ -56,9 +56,9 @@ function Router() {
         <NavItemStyle>
           <Link to="/rpg">RPG</Link>
         </NavItemStyle>
-        {/* <NavItemStyle>
+        <NavItemStyle>
           <Link to="/mineSearch">지뢰찾기</Link>
-        </NavItemStyle> */}
+        </NavItemStyle>
       </NavListStyle>
       {element}
     </>

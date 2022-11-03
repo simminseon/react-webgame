@@ -2,7 +2,7 @@ import React from "react";
 import Title from "../../components/title/Title";
 import Table from "./Table";
 import Form from "./Form";
-import { createContext } from "react";
+import { createContext, useMemo } from "react";
 
 export const CODE = {
   MINE: -7, // 지뢰
@@ -20,23 +20,48 @@ export const TableContext = createContext({
   dispatch: () => {},
 });
 
-// const colArray = Array(10).fill(null);
-// const rowArray = Array(10).fill(colArray);
-
 const initialState = {
   tableData: [],
   timer: 0,
   result: "",
 };
-console.log(initialState.tableData.length);
+
 const plantMine = (row, cell, mine) => {
-  const cellArr = Array(null).fill(cell);
-  const rowArr = Array(cellArr).fill(row);
-  // console.log(row, cell, mine);
-  console.log([rowArr]);
+  const candidate = Array(row * cell)
+    .fill()
+    .map((data, i) => {
+      return i;
+    });
+
+  const shuffle = [];
+  while (candidate.length > row * cell - mine) {
+    const chosen = candidate.splice(
+      Math.floor(Math.random() * candidate.length),
+      1
+    )[0];
+
+    shuffle.push(chosen);
+  }
+  const data = [];
+  for (let i = 0; i < row; i++) {
+    const rowData = [];
+    data.push(rowData);
+    for (let j = 0; j < cell; j++) {
+      rowData.push(CODE.NORMAL);
+    }
+  }
+
+  for (let k = 0; k < shuffle.length; k++) {
+    const ver = Math.floor(shuffle[k] / cell);
+    const hor = shuffle[k] % cell;
+
+    data[ver][hor] = CODE.MINE;
+  }
+  return data;
 };
 
 export const START_GAME = "START_GAME";
+export const OPEN_CELL = "OPEN_CELL";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -45,6 +70,15 @@ const reducer = (state, action) => {
         ...state,
         tableData: plantMine(action.row, action.cell, action.mine),
       };
+    case OPEN_CELL: {
+      const tableData = [...state.tableData];
+      tableData[action.row] = [...state.tableData[action.row]];
+      tableData[action.row][action.cell] = CODE.OPENED;
+      return {
+        ...state,
+        tableData,
+      };
+    }
     default:
       return state;
   }
@@ -52,11 +86,11 @@ const reducer = (state, action) => {
 
 function MineSearch() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
-  const value = React.useMemo(
+  const value = useMemo(
     () => ({ tableData: state.tableData, dispatch }),
     [state.tableData]
   );
-
+  console.log(state.tableData);
   return (
     <TableContext.Provider value={value}>
       <Title>지뢰찾기</Title>

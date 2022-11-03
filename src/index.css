@@ -150,3 +150,15 @@ body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
 }
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+table td {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #000;
+  text-align: center;
+}

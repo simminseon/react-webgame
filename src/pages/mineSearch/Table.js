@@ -1,15 +1,20 @@
 import React from "react";
-import Tr from "./Tr";
 import { useContext } from "react";
 import { TableContext } from "./MineSearch";
+import Tr from "./Tr";
 
 function Table() {
   const tableArr = [];
-  const { dispatch } = useContext(TableContext);
+  const { tableData } = useContext(TableContext);
+  console.log(tableData);
   return (
     <table>
       <tbody>
-        <Tr />
+        {Array(tableData.length)
+          .fill()
+          .map((tr, i) => (
+            <Tr rowIndex={i} />
+          ))}
       </tbody>
     </table>
   );
